@@ -1,0 +1,15 @@
+{
+  "name": "airport-turnaround-context",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "航班过站运行领域资料服务",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
+
