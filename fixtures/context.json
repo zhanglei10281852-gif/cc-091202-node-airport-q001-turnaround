@@ -1,0 +1,28 @@
+{
+  "scenario": "短停航班保障节点与乱序上报",
+  "timezone": "Asia/Shanghai",
+  "records": [
+    {
+      "flightLegId": "MU5107-20260912-PVG-PEK",
+      "aircraftRegistration": "B-20A1",
+      "taskCode": "CATERING",
+      "dependsOn": ["CABIN_CLEANING"],
+      "plannedStart": "2026-09-12T08:20:00+08:00",
+      "plannedEnd": "2026-09-12T08:35:00+08:00"
+    },
+    {
+      "eventId": "evt-003",
+      "taskCode": "CATERING",
+      "kind": "COMPLETED",
+      "occurredAt": "2026-09-12T08:37:00+08:00",
+      "receivedAt": "2026-09-12T08:37:10+08:00"
+    },
+    {
+      "eventId": "evt-002",
+      "taskCode": "CATERING",
+      "kind": "STARTED",
+      "occurredAt": "2026-09-12T08:23:00+08:00",
+      "receivedAt": "2026-09-12T08:38:00+08:00"
+    }
+  ]
+}
