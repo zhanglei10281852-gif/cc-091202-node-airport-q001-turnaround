@@ -5,5 +5,10 @@ services:
       - "${APP_PORT:-3000}:3000"
     environment:
       PORT: 3000
+      EVENT_LOG_PATH: /data/events.jsonl
+    volumes:
+      - turnaround-data:/data
     restart: unless-stopped
 
+volumes:
+  turnaround-data:

@@ -1,28 +1,95 @@
 {
   "scenario": "短停航班保障节点与乱序上报",
   "timezone": "Asia/Shanghai",
+  "description": "MU5107 上海虹桥至北京首都短停过站，B-20A1。配餐环节先后收到三条顺序颠倒的上报，其中两条是不同岗位报出的不同完成时间。",
   "records": [
     {
-      "flightLegId": "MU5107-20260912-PVG-PEK",
+      "type": "plan",
+      "flightLegId": "MU5107-20260912-SHA-PEK",
+      "flightNumber": "MU5107",
+      "origin": "SHA",
+      "destination": "PEK",
       "aircraftRegistration": "B-20A1",
-      "taskCode": "CATERING",
-      "dependsOn": ["CABIN_CLEANING"],
-      "plannedStart": "2026-09-12T08:20:00+08:00",
-      "plannedEnd": "2026-09-12T08:35:00+08:00"
+      "scheduledOffBlock": "2026-09-12T09:00:00+08:00",
+      "finalTaskCode": "DOOR_CLOSED",
+      "tasks": [
+        {
+          "taskCode": "ARRIVAL_CHOCKS",
+          "name": "挡轮挡",
+          "responsibleUnit": "机务",
+          "dependsOn": [],
+          "plannedStart": "2026-09-12T08:00:00+08:00",
+          "plannedEnd": "2026-09-12T08:02:00+08:00"
+        },
+        {
+          "taskCode": "CABIN_CLEANING",
+          "name": "客舱清洁",
+          "responsibleUnit": "清洁队",
+          "dependsOn": ["ARRIVAL_CHOCKS"],
+          "plannedStart": "2026-09-12T08:05:00+08:00",
+          "plannedEnd": "2026-09-12T08:25:00+08:00"
+        },
+        {
+          "taskCode": "FUELING",
+          "name": "航油加注",
+          "responsibleUnit": "航油",
+          "dependsOn": ["ARRIVAL_CHOCKS"],
+          "plannedStart": "2026-09-12T08:05:00+08:00",
+          "plannedEnd": "2026-09-12T08:25:00+08:00"
+        },
+        {
+          "taskCode": "CATERING",
+          "name": "配餐装机",
+          "responsibleUnit": "配餐",
+          "dependsOn": ["CABIN_CLEANING"],
+          "plannedStart": "2026-09-12T08:20:00+08:00",
+          "plannedEnd": "2026-09-12T08:35:00+08:00"
+        },
+        {
+          "taskCode": "BOARDING",
+          "name": "旅客登机",
+          "responsibleUnit": "客运",
+          "dependsOn": ["CATERING", "FUELING"],
+          "plannedStart": "2026-09-12T08:35:00+08:00",
+          "plannedEnd": "2026-09-12T08:55:00+08:00"
+        },
+        {
+          "taskCode": "DOOR_CLOSED",
+          "name": "关舱",
+          "responsibleUnit": "机组",
+          "dependsOn": ["BOARDING"],
+          "plannedStart": "2026-09-12T08:55:00+08:00",
+          "plannedEnd": "2026-09-12T09:00:00+08:00"
+        }
+      ]
     },
     {
+      "type": "event",
       "eventId": "evt-003",
       "taskCode": "CATERING",
       "kind": "COMPLETED",
+      "responsibleUnit": "配餐",
       "occurredAt": "2026-09-12T08:37:00+08:00",
       "receivedAt": "2026-09-12T08:37:10+08:00"
     },
     {
+      "type": "event",
       "eventId": "evt-002",
       "taskCode": "CATERING",
       "kind": "STARTED",
+      "responsibleUnit": "配餐",
       "occurredAt": "2026-09-12T08:23:00+08:00",
       "receivedAt": "2026-09-12T08:38:00+08:00"
+    },
+    {
+      "type": "event",
+      "eventId": "evt-004",
+      "taskCode": "CATERING",
+      "kind": "COMPLETED",
+      "responsibleUnit": "客运复核岗",
+      "note": "看到配餐车离开即报完成，时间与配餐自报不一致",
+      "occurredAt": "2026-09-12T08:41:00+08:00",
+      "receivedAt": "2026-09-12T08:42:05+08:00"
     }
   ]
 }
