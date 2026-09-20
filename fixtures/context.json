@@ -3,17 +3,57 @@
   "timezone": "Asia/Shanghai",
   "records": [
     {
+      "type": "leg",
       "flightLegId": "MU5107-20260912-PVG-PEK",
       "aircraftRegistration": "B-20A1",
+      "turnaroundStart": "2026-09-12T08:05:00+08:00",
+      "scheduledDoorClose": "2026-09-12T09:00:00+08:00"
+    },
+    {
+      "type": "task",
+      "taskCode": "DISEMBARK",
+      "responsibleUnit": "客运保障室",
+      "dependsOn": [],
+      "plannedStart": "2026-09-12T08:05:00+08:00",
+      "plannedEnd": "2026-09-12T08:15:00+08:00"
+    },
+    {
+      "type": "task",
+      "taskCode": "CABIN_CLEANING",
+      "responsibleUnit": "客舱保洁队",
+      "dependsOn": ["DISEMBARK"],
+      "plannedStart": "2026-09-12T08:15:00+08:00",
+      "plannedEnd": "2026-09-12T08:30:00+08:00"
+    },
+    {
+      "type": "task",
+      "taskCode": "REFUELLING",
+      "responsibleUnit": "航空加油站",
+      "dependsOn": [],
+      "plannedStart": "2026-09-12T08:10:00+08:00",
+      "plannedEnd": "2026-09-12T08:35:00+08:00"
+    },
+    {
+      "type": "task",
       "taskCode": "CATERING",
+      "responsibleUnit": "航机配餐部",
       "dependsOn": ["CABIN_CLEANING"],
       "plannedStart": "2026-09-12T08:20:00+08:00",
       "plannedEnd": "2026-09-12T08:35:00+08:00"
     },
     {
+      "type": "task",
+      "taskCode": "BOARDING",
+      "responsibleUnit": "客运保障室",
+      "dependsOn": ["CABIN_CLEANING", "REFUELLING", "CATERING"],
+      "plannedStart": "2026-09-12T08:40:00+08:00",
+      "plannedEnd": "2026-09-12T08:55:00+08:00"
+    },
+    {
       "eventId": "evt-003",
       "taskCode": "CATERING",
       "kind": "COMPLETED",
+      "reporter": "配餐班组长",
       "occurredAt": "2026-09-12T08:37:00+08:00",
       "receivedAt": "2026-09-12T08:37:10+08:00"
     },
@@ -21,8 +61,18 @@
       "eventId": "evt-002",
       "taskCode": "CATERING",
       "kind": "STARTED",
+      "reporter": "配餐班组长",
       "occurredAt": "2026-09-12T08:23:00+08:00",
       "receivedAt": "2026-09-12T08:38:00+08:00"
+    },
+    {
+      "eventId": "evt-005",
+      "taskCode": "CATERING",
+      "kind": "COMPLETED",
+      "reporter": "廊桥协调岗",
+      "note": "另一岗位按车辆离场时间重复上报完成",
+      "occurredAt": "2026-09-12T08:41:00+08:00",
+      "receivedAt": "2026-09-12T08:38:40+08:00"
     }
   ]
 }
